@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Imgur Gallery</string>
+
+    <string name="empty_message">No results found</string>
+    <string name="error_message">There was a problem loading the data, please try again!</string>
+    <string name="swipe_message">Swipe down to refresh</string>
+
+</resources>

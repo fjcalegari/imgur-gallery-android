@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.fjcalegari.imgur"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.kotlin.stdlib
+
+    // support
+    implementation deps.support.core_utils
+    implementation deps.support.core_ktx
+    implementation deps.support.appcompat
+    implementation deps.support.design
+    implementation deps.support.constraintlayout
+    implementation deps.support.swiperefreshlayout
+
+    // arch
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.reactivestreams
+
+    // rx
+    implementation deps.rx.rx2java
+    implementation deps.rx.rx2kotlin
+    implementation deps.rx.rx2android
+
+    // Retrofit2
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rx
+    implementation deps.retrofit.okhttp_logging_interceptor
+
+    // Dagger
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
+    // Glide
+    implementation deps.glide.runtime
+    kapt deps.glide.compiler
+
+    // Other
+    implementation deps.others.timber
+    implementation deps.others.gson
+
+    // Local unit tests
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitokotlin2
+
+    // Instrumentation tests
+    androidTestImplementation deps.android_test.espresso
+    androidTestImplementation deps.android_test.runner
+    androidTestImplementation deps.android_test.rules
+}
