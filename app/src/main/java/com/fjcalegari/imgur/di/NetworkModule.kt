@@ -18,8 +18,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-        private const val BASE_URL = "https://api.imgur.com/"
-        private const val VERSION  = "3/"
+        private const val BASE_URL = "https://api.imgur.com/3/"
     }
 
     @Provides
@@ -43,7 +42,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(httpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL + VERSION)
+            .baseUrl(BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
