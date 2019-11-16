@@ -19,3 +19,4 @@ build/
 .externalNativeBuild
 app/build
 build
+/gradle.properties
