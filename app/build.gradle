@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
+    compileSdkVersion Versions.targetSdk
+    buildToolsVersion Versions.buildTools
     defaultConfig {
         applicationId "com.fjcalegari.imgur"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -34,53 +34,54 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation deps.kotlin.stdlib
+    implementation(Dependencies.kotlin)
+    implementation(Dependencies.kotlin8)
 
     // support
-    implementation deps.support.core_utils
-    implementation deps.support.core_ktx
-    implementation deps.support.appcompat
-    implementation deps.support.design
-    implementation deps.support.constraintlayout
-    implementation deps.support.swiperefreshlayout
+    implementation(Dependencies.supportCoreUtils)
+    implementation(Dependencies.supportCoreKtx)
+    implementation(Dependencies.supportAppcompat)
+    implementation(Dependencies.supportDesign)
+    implementation(Dependencies.supportConstraintlayout)
+    implementation(Dependencies.supportSwiperefreshlayout)
 
     // arch
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.extensions
-    implementation deps.lifecycle.reactivestreams
+    implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.lifecycleextensions)
+    implementation(Dependencies.lifecycleReactivestreams)
 
     // rx
-    implementation deps.rx.rx2java
-    implementation deps.rx.rx2kotlin
-    implementation deps.rx.rx2android
+    implementation(Dependencies.rx2java)
+    implementation(Dependencies.rx2kotlin)
+    implementation(Dependencies.rx2android)
 
     // Retrofit2
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-    implementation deps.retrofit.rx
-    implementation deps.retrofit.okhttp_logging_interceptor
+    implementation(Dependencies.retrofitRuntime)
+    implementation(Dependencies.retrofitGson)
+    implementation(Dependencies.retrofitRx)
+    implementation(Dependencies.okhttpLoggingInterceptor)
 
     // Dagger
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android_support
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
+    implementation(Dependencies.daggerRuntime)
+    implementation(Dependencies.daggerAndroidSupport)
+    kapt(Dependencies.daggerAndroidSupportCompiler)
+    kapt(Dependencies.daggerCompiler)
 
     // Glide
-    implementation deps.glide.runtime
-    kapt deps.glide.compiler
+    implementation(Dependencies.glideRuntime)
+    kapt(Dependencies.glideCompiler)
 
     // Other
-    implementation deps.others.timber
-    implementation deps.others.gson
+    implementation(Dependencies.timber)
+    implementation(Dependencies.gson)
 
     // Local unit tests
-    testImplementation deps.test.junit
-    testImplementation deps.test.mockito
-    testImplementation deps.test.mockitokotlin2
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.mockito)
+    testImplementation(Dependencies.mockitoKotlin2)
 
     // Instrumentation tests
-    androidTestImplementation deps.android_test.espresso
-    androidTestImplementation deps.android_test.runner
-    androidTestImplementation deps.android_test.rules
+    androidTestImplementation(Dependencies.androidTestEspresso)
+    androidTestImplementation(Dependencies.androidTestRunner)
+    androidTestImplementation(Dependencies.androidTestRules)
 }
