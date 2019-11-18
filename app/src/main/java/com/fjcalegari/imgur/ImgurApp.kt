@@ -1,9 +1,9 @@
 package com.fjcalegari.imgur
 
+import com.data.di.DataModule
+import com.domain.di.DomainModule
 import com.fjcalegari.imgur.di.ApplicationModule
 import com.fjcalegari.imgur.di.NetworkModule
-import com.fjcalegari.imgur.di.RepositoryModule
-import com.fjcalegari.imgur.di.UseCaseModule
 import com.fjcalegari.imgur.di.component.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -26,8 +26,8 @@ class ImgurApp : DaggerApplication() {
             .application(this)
             .applicationModule(ApplicationModule(applicationContext))
             .networkModule(NetworkModule())
-            .repositoryModule(RepositoryModule())
-            .useCaseModule(UseCaseModule())
+            .dataModule(DataModule())
+            .domainModule(DomainModule())
             .build()
     }
 

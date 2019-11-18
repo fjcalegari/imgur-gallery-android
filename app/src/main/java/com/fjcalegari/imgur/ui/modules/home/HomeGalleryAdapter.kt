@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fjcalegari.imgur.R
 import com.fjcalegari.imgur.databinding.ItemGalleryImgBinding
-import com.fjcalegari.imgur.domain.model.GalleryModel
 
 
-class HomeGalleryAdapter : ListAdapter<GalleryModel, HomeGalleryAdapter.ItemHolder>(GalleryDiffCallback()) {
+class HomeGalleryAdapter :
+    ListAdapter<ItemModelView, HomeGalleryAdapter.ItemHolder>(GalleryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val itemGalleryImgBinding: ItemGalleryImgBinding = DataBindingUtil.inflate(
@@ -30,21 +30,24 @@ class HomeGalleryAdapter : ListAdapter<GalleryModel, HomeGalleryAdapter.ItemHold
     inner class ItemHolder(
         private val itemGalleryImgBinding: ItemGalleryImgBinding
     ) : RecyclerView.ViewHolder(itemGalleryImgBinding.root) {
-        fun bind(galleryModel: GalleryModel) {
-            itemGalleryImgBinding.gallery = galleryModel
+        fun bind(itemModelView: ItemModelView) {
+            itemGalleryImgBinding.item = itemModelView
             itemGalleryImgBinding.executePendingBindings()
         }
 
     }
 }
 
-private class GalleryDiffCallback : DiffUtil.ItemCallback<GalleryModel>() {
+private class GalleryDiffCallback : DiffUtil.ItemCallback<ItemModelView>() {
 
-    override fun areItemsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean {
+    override fun areItemsTheSame(oldItem: ItemModelView, newItem: ItemModelView): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean {
+    override fun areContentsTheSame(
+        oldItem: ItemModelView,
+        newItem: ItemModelView
+    ): Boolean {
         return oldItem == newItem
     }
 }

@@ -4,23 +4,27 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.fjcalegari.imgur.domain.model.GalleryModel
 import com.fjcalegari.imgur.ui.view.ScrollChildSwipeRefreshLayout
 
 object HomeBindings {
 
-    @BindingAdapter("app:items")
-    @JvmStatic fun setItems(recyclerView: RecyclerView, items: List<GalleryModel>?) {
-        items?.let {
-            recyclerView.visibility = if (items.isNotEmpty()) {
-                View.VISIBLE
+    @BindingAdapter("showWhenLoading")
+    @JvmStatic
+    fun <T>showWhenLoading(view: SwipeRefreshLayout, viewState: HomeViewModel.ViewState) {
+        view.isRefreshing = viewState.isLoading
+    }
+
+    @BindingAdapter("items")
+    @JvmStatic
+    fun setItems(recyclerView: RecyclerView, viewState: HomeViewModel.ViewState) {
+        with(recyclerView) {
+            (this.adapter as HomeGalleryAdapter).submitList(viewState.items)
+            if (viewState.items.isNotEmpty()) {
+                this.visibility = View.VISIBLE
             } else {
-                View.GONE
+                this.visibility = View.GONE
             }
-            with(recyclerView.adapter as HomeGalleryAdapter) {
-                submitList(items)
-            }
-        } ?: also { recyclerView.visibility = View.GONE }
+        }
     }
 
     /**
@@ -29,8 +33,10 @@ object HomeBindings {
      * Creates the `android:onRefresh` for a [SwipeRefreshLayout].
      */
     @BindingAdapter("android:onRefresh")
-    @JvmStatic fun ScrollChildSwipeRefreshLayout.setSwipeRefreshLayoutOnRefreshListener(
-        viewModel: HomeViewModel) {
+    @JvmStatic
+    fun ScrollChildSwipeRefreshLayout.setSwipeRefreshLayoutOnRefreshListener(
+        viewModel: HomeViewModel
+    ) {
         setOnRefreshListener { viewModel.refresh() }
     }
 

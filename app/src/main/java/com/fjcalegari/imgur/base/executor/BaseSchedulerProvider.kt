@@ -1,4 +1,4 @@
-package com.fjcalegari.imgur.domain.executor
+package com.fjcalegari.imgur.base.executor
 
 import io.reactivex.Scheduler
 

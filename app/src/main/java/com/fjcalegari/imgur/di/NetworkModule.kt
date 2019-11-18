@@ -1,8 +1,7 @@
 package com.fjcalegari.imgur.di
 
 import com.fjcalegari.imgur.BuildConfig
-import com.fjcalegari.imgur.data.source.remote.ApiHeaderInterceptor
-import com.fjcalegari.imgur.data.source.remote.ImgurApi
+import com.fjcalegari.imgur.data.remote.ApiHeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,9 +21,9 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(apiHeaderInterceptor: ApiHeaderInterceptor): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            addInterceptor(ApiHeaderInterceptor())
+            addInterceptor(apiHeaderInterceptor)
             if (BuildConfig.DEBUG) {
                 addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
@@ -33,6 +32,7 @@ class NetworkModule {
         }.build()
     }
 
+    @Singleton
     @Provides
     fun provideGson(): Gson {
         return GsonBuilder()
@@ -51,6 +51,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideImgurApi(retrofit: Retrofit): ImgurApi = retrofit.create(ImgurApi::class.java)
+    fun provideApiHeaderInterceptor(): ApiHeaderInterceptor =
+        ApiHeaderInterceptor(BuildConfig.API_CLIENT_ID_KEY)
 
 }

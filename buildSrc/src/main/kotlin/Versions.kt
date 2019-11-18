@@ -28,6 +28,8 @@ object Versions {
     // Dagger
     const val dagger = "2.21"
 
+    const val javaxAnnotation = "1.0"
+
     // Glide
     const val glide = "4.9.0"
 

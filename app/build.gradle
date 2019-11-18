@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Versions.targetSdk
-    buildToolsVersion Versions.buildTools
     defaultConfig {
         applicationId "com.fjcalegari.imgur"
         minSdkVersion Versions.minSdk
@@ -21,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
     dataBinding {
         enabled = true
@@ -29,16 +32,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    implementation project(':data')
 
     implementation(Dependencies.kotlin)
-    implementation(Dependencies.kotlin8)
 
     // support
-    implementation(Dependencies.supportCoreUtils)
     implementation(Dependencies.supportCoreKtx)
     implementation(Dependencies.supportAppcompat)
     implementation(Dependencies.supportDesign)
@@ -62,10 +68,12 @@ dependencies {
     implementation(Dependencies.okhttpLoggingInterceptor)
 
     // Dagger
-    implementation(Dependencies.daggerRuntime)
+    implementation(Dependencies.dagger)
+    implementation(Dependencies.daggerAndroid)
     implementation(Dependencies.daggerAndroidSupport)
-    kapt(Dependencies.daggerAndroidSupportCompiler)
+    kapt(Dependencies.daggerAndroidProcessor)
     kapt(Dependencies.daggerCompiler)
+    compileOnly(Dependencies.javaxAnnotation)
 
     // Glide
     implementation(Dependencies.glideRuntime)

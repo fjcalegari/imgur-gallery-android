@@ -11,7 +11,6 @@ object Dependencies {
     val supportConstraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
     val supportSwiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
 
-
     val lifecycleRuntime = "android.arch.lifecycle:runtime:${Versions.lifecycle}"
     val lifecycleextensions = "android.arch.lifecycle:extensions:${Versions.lifecycle}"
     val lifecycleReactivestreams = "android.arch.lifecycle:reactivestreams:${Versions.lifecycle}"
@@ -25,10 +24,13 @@ object Dependencies {
     val retrofitRx =  "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     val okhttpLoggingInterceptor =  "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
-    val daggerRuntime =  "com.google.dagger:dagger:${Versions.dagger}"
+    val dagger =  "com.google.dagger:dagger:${Versions.dagger}"
+    val daggerAndroid =  "com.google.dagger:dagger-android:${Versions.dagger}"
     val daggerAndroidSupport =  "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    val daggerAndroidSupportCompiler =  "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+    val daggerAndroidProcessor =  "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     val daggerCompiler =  "com.google.dagger:dagger-compiler:${Versions.dagger}"
+
+    val javaxAnnotation = "javax.annotation:jsr250-api:${Versions.javaxAnnotation}"
 
     val glideRuntime =  "com.github.bumptech.glide:glide:${Versions.glide}"
     val glideCompiler =  "com.github.bumptech.glide:compiler:${Versions.glide}"

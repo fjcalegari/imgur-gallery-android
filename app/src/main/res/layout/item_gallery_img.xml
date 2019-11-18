@@ -7,9 +7,11 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
-            name="gallery"
-            type="com.fjcalegari.imgur.domain.model.GalleryModel" />
+            name="item"
+            type="com.fjcalegari.imgur.ui.modules.home.ItemModelView" />
 
     </data>
 
@@ -18,14 +20,15 @@
         android:layout_height="wrap_content"
         >
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@{item.id}"
             android:scaleType="fitXY"
-            app:imageLoadUrl="@{gallery.urlToImage}"
-            android:contentDescription="@string/app_name"
+            app:imageLoadUrl="@{item.urlToImage}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,4:3"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

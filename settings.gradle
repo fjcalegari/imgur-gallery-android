@@ -1,2 +1,1 @@
-include ':app'
-rootProject.name='Imgur Gallery'
+include ':app', ':domain', ':data'

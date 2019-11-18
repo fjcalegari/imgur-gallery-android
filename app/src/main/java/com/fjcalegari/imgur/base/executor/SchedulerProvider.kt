@@ -1,4 +1,4 @@
-package com.fjcalegari.imgur.domain.executor
+package com.fjcalegari.imgur.base.executor
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -6,7 +6,8 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Singleton
 
 @Singleton
-class SchedulerProvider : BaseSchedulerProvider {
+class SchedulerProvider :
+    BaseSchedulerProvider {
 
     override fun io(): Scheduler {
         return Schedulers.io()

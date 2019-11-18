@@ -10,8 +10,6 @@
 
         <import type="android.view.View"/>
 
-        <import type="com.fjcalegari.imgur.ui.common.Status" />
-
         <variable
             name="viewmodel"
             type="com.fjcalegari.imgur.ui.modules.home.HomeViewModel" />
@@ -22,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onRefresh="@{viewmodel}"
-        app:refreshing="@{viewmodel.galleries.status == Status.LOADING}"
+        app:showWhenLoading="@{viewmodel.viewState}"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="@{viewmodel.galleries.status == Status.ERROR ? View.VISIBLE : View.GONE, default=gone}"
+                android:visibility="@{viewmodel.viewState.isErrorOrEmpty ? View.VISIBLE : View.GONE, default=gone}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="16dp"
-                    app:message="@{viewmodel.errorOrEmpty.data}"
+                    app:message="@{viewmodel.viewState.errorOrEmptyMessage}"
                     tools:text="@string/error_message" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -57,7 +55,7 @@
                     android:gravity="center"
                     android:padding="16dp"
                     android:text="@string/swipe_message"
-                    />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -67,7 +65,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="4dp"
                 android:overScrollMode="never"
-                app:items="@{viewmodel.galleries.data}"
+                app:items="@{viewmodel.viewState}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

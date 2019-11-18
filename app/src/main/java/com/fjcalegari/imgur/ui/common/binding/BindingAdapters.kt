@@ -12,20 +12,18 @@ import com.fjcalegari.imgur.R
 object BindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("app:imageLoadUrl")
+    @BindingAdapter("imageLoadUrl")
     fun imageLoadUrl(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
-            .load(url.plus("m.jpg"))
-            .apply(RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-            )
-            .placeholder(R.drawable.ic_logo_cat)
-            .error(R.drawable.ic_logo_cat)
-            .into(imageView)
+                .load(url)
+                .apply(RequestOptions.centerCropTransform().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                .placeholder(R.drawable.ic_logo_cat)
+                .error(R.drawable.ic_logo_cat)
+                .into(imageView)
     }
 
     @JvmStatic
-    @BindingAdapter("app:message")
+    @BindingAdapter("message")
     fun message(appCompatTextView: AppCompatTextView, @StringRes text: Int?) {
         text?.let {
             appCompatTextView.text = appCompatTextView.context.getString(text)
